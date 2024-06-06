@@ -567,30 +567,42 @@
                 </div>
             </div>
         </header>
-        <audio id="autoplayAudio">
-            <source src="music.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-        <button id="playButton" style="display:none;">Play Audio</button>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var audio = document.getElementById('autoplayAudio');
-                var button = document.getElementById('playButton');
-    
-                // Attempt to autoplay the audio
+
+    <audio id="autoplayAudio">
+        <source src="music.mp3" type="audio/mpeg">
+   
+    </audio>
+    <button id="playButton" style="display: hidden;">Play Audio</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('autoplayAudio');
+            var button = document.getElementById('playButton');
+
+            // Attempt to autoplay the audio
+            audio.play().then(function() {
+                console.log('Autoplay started successfully');
+                // Hide the button if autoplay is successful
+                button.style.display = 'none';
+            }).catch(function(error) {
+                console.log('Autoplay was prevented:', error);
+                // Show play button to allow user interaction
+                button.style.display = 'none';
+            });
+
+            // Add event listener for the button to play audio on click
+            button.addEventListener('click', function() {
                 audio.play().then(function() {
-                    console.log('Autoplay started successfully');
+                    console.log('Audio started successfully after user interaction');
+                    // Hide the button after audio starts
+                    button.style.display = 'none';
                 }).catch(function(error) {
-                    console.log('Autoplay was prevented:', error);
-                    // Show play button to allow user interaction
-                    button.style.display = 'block';
-                });
-    
-                button.addEventListener('click', function() {
-                    audio.play();
+                    console.log('Error playing audio:', error);
                 });
             });
-        </script>
+        });
+    </script>
+
+
         <div class="elementor-element elementor-element-92de7e2 e-flex e-con-boxed e-con e-parent" data-id="92de7e2" data-element_type="container" data-settings="">
             <div class="e-con-inner">
                 <div class="elementor-background-video-container elementor-hidden-phone">
