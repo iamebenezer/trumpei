@@ -568,39 +568,7 @@
             </div>
         </header>
 
-    <audio id="autoplayAudio">
-        <source src="music.mp3" type="audio/mpeg">
-   
-    </audio>
-    <button id="playButton" style="display: hidden;">Play Audio</button>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var audio = document.getElementById('autoplayAudio');
-            var button = document.getElementById('playButton');
-
-            // Attempt to autoplay the audio
-            audio.play().then(function() {
-                console.log('Autoplay started successfully');
-                // Hide the button if autoplay is successful
-                button.style.display = 'none';
-            }).catch(function(error) {
-                console.log('Autoplay was prevented:', error);
-                // Show play button to allow user interaction
-                button.style.display = 'none';
-            });
-
-            // Add event listener for the button to play audio on click
-            button.addEventListener('click', function() {
-                audio.play().then(function() {
-                    console.log('Audio started successfully after user interaction');
-                    // Hide the button after audio starts
-                    button.style.display = 'none';
-                }).catch(function(error) {
-                    console.log('Error playing audio:', error);
-                });
-            });
-        });
-    </script>
+ 
 
 
         <div class="elementor-element elementor-element-92de7e2 e-flex e-con-boxed e-con e-parent" data-id="92de7e2" data-element_type="container" data-settings="">
@@ -1105,7 +1073,20 @@
             </div>
         </div>
        
+        <audio id="background-music" autoplay loop>
+            <source src="music.mp3" type="audio/mpeg">
+          
+        </audio>
+        <script>
     
+            // Optional: Ensure autoplay works after user interaction
+            document.addEventListener('click', function() {
+                var audio = document.getElementById('background-music');
+                if (audio.paused) {
+                    audio.play();
+                }
+            });
+        </script>
     </div>
     <link rel='stylesheet' id='e-animations-css' href='https://chinesenydragon.com/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.21.8' media='all' />
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
