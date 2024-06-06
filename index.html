@@ -643,6 +643,9 @@
                 <div class="elementor-element elementor-element-09a55ea elementor-widget elementor-widget-heading" data-id="09a55ea" data-element_type="widget" data-widget_type="heading.default">
                     <div class="elementor-widget-container">
                         <style>
+                            body, html{
+                                overflow-x: hidden;
+                            }
                             @font-face {
                                 font-family: head;
                                 src: url(/head.ttf);
@@ -1075,16 +1078,21 @@
        
         <audio id="background-music" autoplay loop>
             <source src="music.mp3" type="audio/mpeg">
-          
+            Your browser does not support the audio element.
         </audio>
-        <script>
     
-            // Optional: Ensure autoplay works after user interaction
-            document.addEventListener('click', function() {
+        <script>
+            // Ensure autoplay works after page load
+            window.addEventListener('load', function() {
                 var audio = document.getElementById('background-music');
-                if (audio.paused) {
-                    audio.play();
-                }
+                audio.play().catch(function(error) {
+                    // Optional: Ensure autoplay works after user interaction if blocked
+                    document.addEventListener('click', function() {
+                        if (audio.paused) {
+                            audio.play();
+                        }
+                    });
+                });
             });
         </script>
     </div>
